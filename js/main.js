@@ -1,9 +1,12 @@
+// Counts for keeping track of which slide the slideshow is currently on
 var current_cnt = {};
 
+// Initializes the slideshow
 function initializeSlides(set) {
   current_cnt[set] = 1;
 }
 
+// Display a given slide
 function showSlides(n, set, set_caption) {
   var i;
   var slides = document.getElementsByClassName(set);
@@ -29,11 +32,13 @@ function showSlides(n, set, set_caption) {
   console.log(caption.innerHTML);
 }
 
+// Move to the previous or next slide
 function plusSlides(n, set, set_caption) {
   current_cnt[set] += n;
   showSlides(current_cnt[set], set, set_caption);
 }
 
+// Mobile nav
 function toggleNav() {
     var nav_bar = document.getElementById("responsive_nav");
     var nav_banner = document.getElementsByClassName("navigation");
