@@ -1,0 +1,38 @@
+
+article.list {
+  width: 100%;
+  padding: 80px 40px 0 40px;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.title_link {
+  width: 25%;
+  height: 250px;
+  padding: 0 10px 20px 10px;
+}
+
+.link_img_container {
+  width: 100%;
+  height: 80%;
+  margin-bottom: 10px;
+}
+
+
+@media all and (max-width: 939px) {
+  .title_link {
+    width: 33.3333%;
+  }
+
+  article.list {
+    padding: 80px 10px 0 10px;
+  }
+}
+
+@media all and (max-width: 559px) {
+  .title_link {
+    width: 50%;
+    height: 200px;
+  }
+}
+
