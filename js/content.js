@@ -1,6 +1,9 @@
 // An array used to store slideshow ids for initializing all the slideshows on a page
 var slideshow_id_list = [];
 
+// Grab the width of the browser, to be used later for image sizes
+var width = window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth;
+
 // Grab the data from server via JSON
 var xmlhttp = new XMLHttpRequest();
 xmlhttp.onreadystatechange = function() {
@@ -17,7 +20,7 @@ xmlhttp.send();
 function createHero(data_obj){
 	// Hero image
 	var header_img = document.getElementsByClassName('header_img_container');
-	var img_url = data_obj.hero_img + 'w1600-no';
+	var img_url = data_obj.hero_img + 'w' + (width + 200) + '-no';
 	var full_url = "url('" + img_url + "')";
 	header_img[0].style.backgroundImage = full_url;
 	header_img[0].style.backgroundSize = "cover";
@@ -84,7 +87,7 @@ function createSection(section_obj) {
 // Create a single slide in a slideshow
 function createSlide(slide_obj, set) {
 	var return_string = "<div class=\"slide fade " + set + "\">";
-	var img_url = slide_obj.img + 'w1200-no';
+	var img_url = slide_obj.img + 'w' + width + '-no';
 	return_string += "<img src=\"" + img_url + "\">";
 	return_string += "<p>" + slide_obj.caption + "</p>";
 
