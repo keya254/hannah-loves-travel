@@ -5,6 +5,7 @@ var slideshow_id_list = [];
 var width = window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth;
 
 // Grab the data from server via JSON
+var article_id = "germany";
 var xmlhttp = new XMLHttpRequest();
 xmlhttp.onreadystatechange = function() {
     if (this.readyState == 4 && this.status == 200 && this.responseText != "") {
@@ -14,10 +15,12 @@ xmlhttp.onreadystatechange = function() {
     }
     else {
     	//TODO: Display an error page
+    	console.log(this.responseText);
     }
 };
-xmlhttp.open("GET", "../page_content.php", true);
-xmlhttp.send();
+xmlhttp.open("POST", "../page_content.php", true);
+xmlhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+xmlhttp.send("param=" + article_id);
 
 // Set up hero section of the page
 function createHero(data_obj){
