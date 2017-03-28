@@ -7,10 +7,13 @@ var width = window.innerWidth || document.documentElement.clientWidth || documen
 // Grab the data from server via JSON
 var xmlhttp = new XMLHttpRequest();
 xmlhttp.onreadystatechange = function() {
-    if (this.readyState == 4 && this.status == 200) {
+    if (this.readyState == 4 && this.status == 200 && this.responseText != "") {
         var json_obj = JSON.parse(this.responseText);
         createHero(json_obj);
 		displaySections(json_obj);
+    }
+    else {
+    	//TODO: Display an error page
     }
 };
 xmlhttp.open("GET", "../page_content.php", true);
