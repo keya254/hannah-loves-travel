@@ -101,7 +101,8 @@ a.body_link:hover {
 
 a.nav_link {
 	font-family: 'Open Sans', sans-serif;
-	font-weight: 700;
+	font-size: 95%;
+	letter-spacing: 0.5px;
 	color: #FFFFFF;
 	text-decoration: none;
 }
@@ -112,7 +113,8 @@ a.nav_link:hover {
 
 a.selected_nav {
 	font-family: 'Open Sans', sans-serif;
-	font-weight: 700;
+	font-size: 95%;
+	letter-spacing: 0.5px;
 	color: #FFD855;
 	text-decoration: none;
 }
@@ -124,7 +126,7 @@ a.selected_nav {
  header {
  	width: 100%;
  	max-width: 1440px;
- 	height: 90vh;
+ 	height: 95vh;
  	max-height: 800px;
  	position: relative;
 	background-color: #FFFFFF;

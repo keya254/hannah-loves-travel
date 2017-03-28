@@ -84,7 +84,7 @@ function createSection(section_obj) {
 	}
 	// Add the controls
 	var caption_id = slideshow_id + "_caption";
-	slideshow += "<div class=\"slideshow_bottom\"><p class=\"caption "+ caption_id + "\"></p><div class=\"slideshow_controls\">1 of 5<a class=\"prev\" onclick=\"plusSlides(-1, '" + slideshow_id + "', '" + caption_id + "')\">&#10094;</a><a class=\"next\" onclick=\"plusSlides(1, '" + slideshow_id + "', '" + caption_id + "')\">&#10095;</a></div></div>";
+	slideshow += "<p class=\"caption "+ caption_id + "\"></p><a class=\"prev\" onclick=\"plusSlides(-1, '" + slideshow_id + "', '" + caption_id + "')\">&#10094;</a><a class=\"next\" onclick=\"plusSlides(1, '" + slideshow_id + "', '" + caption_id + "')\">&#10095;</a>";
 
 	// Add the slideshow_id to the list of slideshows for initialization
 	slideshow_id_list.push(slideshow_id);
