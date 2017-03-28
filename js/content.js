@@ -4,8 +4,18 @@ var slideshow_id_list = [];
 // Grab the width of the browser, to be used later for image sizes
 var width = window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth;
 
+// Parse out the article id, assuming url format: ?article_id, e.g. ?slovenia
+var article_id = "";
+var params = window.location.search.split("?");
+if (params.length < 2) {
+	// Default to germany for now if no id is specified
+	article_id = "germany";
+} else {
+	var param_index = params.length - 1;
+	article_id = params[param_index];
+}
+
 // Grab the data from server via JSON
-var article_id = "germany";
 var xmlhttp = new XMLHttpRequest();
 xmlhttp.onreadystatechange = function() {
     if (this.readyState == 4 && this.status == 200 && this.responseText != "") {
@@ -30,7 +40,7 @@ function createHero(data_obj){
 	var full_url = "url('" + img_url + "')";
 	header_img[0].style.backgroundImage = full_url;
 	header_img[0].style.backgroundSize = "cover";
-	header_img[0].style.backgroundPosition = "top";
+	header_img[0].style.backgroundPosition = "center";
 
 	// Hero text
 	var hero = document.getElementsByClassName('hero');
@@ -93,7 +103,7 @@ function createSection(section_obj) {
 // Create a single slide in a slideshow
 function createSlide(slide_obj, set) {
 	var return_string = "<div class=\"slide fade " + set + "\">";
-	var img_url = slide_obj.img + 'w' + width + '-no';
+	var img_url = slide_obj.img + 'w' + (width + 200) + '-no';
 	return_string += "<img src=\"" + img_url + "\">";
 	return_string += "<p>" + slide_obj.caption + "</p>";
 
