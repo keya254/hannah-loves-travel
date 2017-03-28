@@ -1,15 +1,17 @@
 // An array used to store slideshow ids for initializing all the slideshows on a page
 var slideshow_id_list = [];
 
+var splitter = "?";
+
 // Grab the width of the browser, to be used later for image sizes
 var width = window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth;
 
 // Parse out the article id, assuming url format: ?article_id, e.g. ?slovenia
 var article_id = "";
-var params = window.location.search.split("?");
+var params = window.location.search.split(splitter);
 if (params.length < 2) {
 	// Default to germany for now if no id is specified
-	article_id = "germany";
+	article_id = "globetrotting";
 } else {
 	var param_index = params.length - 1;
 	article_id = params[param_index];
@@ -20,8 +22,8 @@ var xmlhttp = new XMLHttpRequest();
 xmlhttp.onreadystatechange = function() {
     if (this.readyState == 4 && this.status == 200 && this.responseText != "") {
         var json_obj = JSON.parse(this.responseText);
-        createHero(json_obj);
-		displaySections(json_obj);
+		createHero(json_obj);
+		displayMainContent(json_obj);
     }
     else {
     	//TODO: Display an error page
@@ -45,6 +47,42 @@ function createHero(data_obj){
 	// Hero text
 	var hero = document.getElementsByClassName('hero');
 	hero[0].innerHTML="<h1>" + data_obj.title + "</h1>" + "<p>" + data_obj.description + "</p>";
+}
+
+// Display the main content of the page, either it being a list of articles or the different sections of an article
+function displayMainContent(data_obj) {
+	if (data_obj.sections) {
+		displaySections(data_obj);
+	}
+
+	if (data_obj.article_list) {
+		displayArticleList(data_obj);
+	}
+}
+
+// Loop through the array and create a list of articles
+function displayArticleList(data_obj) {
+	var article_list = data_obj.article_list;
+	var index;
+	var article;
+	var page_content = document.getElementsByClassName('content_container')[0];
+	var innerHTML_string = "<article class=\"list\">";
+	
+	for (index = 0; index < article_list.length; index++) {
+		article = article_list[index];
+		var article_title = article.article_title;
+		var article_img = article.article_img;
+		var article_url = splitter + article.article_id;
+		if (article.article_active) {
+			innerHTML_string += "<a class=\"title_link\" href=\"" + article_url + "\"><div class=\"link_img_container\" style=\"background-image:url(" + article_img + ")\"></div>" + article_title + "</a>";
+		} else {
+			innerHTML_string += "<a class=\"title_link inactive\" href=\"" + article_url + "\"><div class=\"link_img_container\" style=\"background-image:url(" + article_img + ")\"></div>" + article_title + "</a>";
+		}
+	}
+
+	innerHTML_string += "</article>";
+
+	page_content.innerHTML = innerHTML_string;
 }
 
 // Loop through the array and create subsections of the page
