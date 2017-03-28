@@ -30,6 +30,14 @@ article p {
   width: 100%;
 }
 
+.slide img.vertical {
+  display: block;
+  width: auto;
+  height: 100%;
+  max-height: 700px;
+  margin: auto;
+}
+
 .slide p {
   display: none;
 }
@@ -61,7 +69,9 @@ article p {
 
 .caption {
   margin: 0;
+  padding-top: 10px;
   width: 100%;
+  text-align: center;
 }
 
 .fade {
@@ -99,6 +109,10 @@ article p {
     width: 100%;
   }
 
+  .slide img.vertical {
+    max-height: 450px;
+  }
+
   .prev, .next {
     top: 35%;
   }
@@ -111,10 +125,6 @@ article p {
     padding-left: 0;
     padding-top: 26px;
   }
-
-  .caption {
-    text-align: center;
-  }
 }
 
 @media all and (max-width: 559px) {
@@ -126,6 +136,10 @@ article p {
   article h2 {
     margin-left: 20px;
     margin-right: 20px;
+  }
+
+    .slide img.vertical {
+    max-height: 250px;
   }
 
   .prev, .next {

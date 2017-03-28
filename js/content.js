@@ -142,7 +142,11 @@ function createSection(section_obj) {
 function createSlide(slide_obj, set) {
 	var return_string = "<div class=\"slide fade " + set + "\">";
 	var img_url = slide_obj.img + 'w' + (width + 200) + '-no';
-	return_string += "<img src=\"" + img_url + "\">";
+	if (slide_obj.vertical) {
+		return_string += "<img class=\"vertical\" src=\"" + img_url + "\">";
+	} else {
+		return_string += "<img src=\"" + img_url + "\">";
+	}
 	return_string += "<p>" + slide_obj.caption + "</p>";
 
 	return return_string + "</div>";
