@@ -1,7 +1,6 @@
-
 article.list {
   width: 100%;
-  padding: 80px 40px 0 40px;
+  padding: 40px;
   display: flex;
   flex-wrap: wrap;
 }
