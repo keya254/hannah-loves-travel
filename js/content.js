@@ -1,6 +1,8 @@
 // An array used to store slideshow ids for initializing all the slideshows on a page
 var slideshow_id_list = [];
-
+// Counts for keeping track of which slide the slideshow is currently on
+var current_cnt = {};
+// URL splittler
 var splitter = "?";
 
 // Grab the width of the browser, to be used later for image sizes
@@ -10,39 +12,25 @@ var width = window.innerWidth || document.documentElement.clientWidth || documen
 var article_id = "";
 var params = window.location.search.split(splitter);
 if (params.length < 2) {
-	// Default to germany for now if no id is specified
-	article_id = "globetrotting";
+	// Default to homepage if no id is specified
+	// TODO: Redirect to index.html
+	article_id = "home";
 } else {
 	var param_index = params.length - 1;
 	article_id = params[param_index];
 }
 
-// Grab the data from server via JSON
-var xmlhttp = new XMLHttpRequest();
-xmlhttp.onreadystatechange = function() {
-    if (this.readyState == 4 && this.status == 200 && this.responseText != "") {
-        var json_obj = JSON.parse(this.responseText);
-		createHero(json_obj);
-		displayMainContent(json_obj);
-    }
-    else {
-    	//TODO: Display an error page
-    	console.log(this.responseText);
-    }
-};
-xmlhttp.open("POST", "../page_content.php", true);
-xmlhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-xmlhttp.send("param=" + article_id);
+// Call the server for page data
+getContentData(article_id, false);
+
+showNav();
+showFooter();
 
 // Set up hero section of the page
 function createHero(data_obj){
 	// Hero image
-	var header_img = document.getElementsByClassName('header_img_container');
 	var img_url = data_obj.hero_img + 'w' + (width + 200) + '-no';
-	var full_url = "url('" + img_url + "')";
-	header_img[0].style.backgroundImage = full_url;
-	header_img[0].style.backgroundSize = "cover";
-	header_img[0].style.backgroundPosition = "center";
+	setBgImage('header_img_container', img_url, "cover", "center");
 
 	// Hero text
 	var hero = document.getElementsByClassName('hero');
@@ -141,10 +129,12 @@ function createSection(section_obj) {
 // Create a single slide in a slideshow
 function createSlide(slide_obj, set) {
 	var return_string = "<div class=\"slide fade " + set + "\">";
-	var img_url = slide_obj.img + 'w' + (width + 200) + '-no';
+	var img_url = "";
 	if (slide_obj.vertical) {
+		img_url = slide_obj.img + 'h700-no';
 		return_string += "<img class=\"vertical\" src=\"" + img_url + "\">";
 	} else {
+		img_url = slide_obj.img + 'w' + (width + 200) + '-no';
 		return_string += "<img src=\"" + img_url + "\">";
 	}
 	return_string += "<p>" + slide_obj.caption + "</p>";
@@ -162,4 +152,41 @@ function intializeSlideshows() {
 		initializeSlides(slideshow_id);
 		showSlides(current_cnt[slideshow_id], slideshow_id, slideshow_id+'_caption');
 	}
+}
+
+// Initializes the slideshow
+function initializeSlides(set) {
+  current_cnt[set] = 1;
+}
+
+// Display a given slide
+function showSlides(n, set, set_caption) {
+  var i;
+  var slides = document.getElementsByClassName(set);
+  var caption = document.getElementsByClassName(set_caption)[0];
+  var currentSlide;
+
+  if (n > slides.length) {
+    current_cnt[set] = 1;
+  } 
+  
+  if (n < 1) {
+    current_cnt[set] = slides.length;
+  }
+  
+  for (i = 0; i < slides.length; i++) {
+      slides[i].style.display = "none"; 
+  }
+
+  n = current_cnt[set];
+  currentSlide = slides[n-1];
+  currentSlide.style.display = "block";
+  caption.innerHTML = currentSlide.getElementsByTagName("p")[0].innerHTML;
+  console.log(caption.innerHTML);
+}
+
+// Move to the previous or next slide
+function plusSlides(n, set, set_caption) {
+  current_cnt[set] += n;
+  showSlides(current_cnt[set], set, set_caption);
 }

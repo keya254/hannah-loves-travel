@@ -1,41 +1,46 @@
-// Counts for keeping track of which slide the slideshow is currently on
-var current_cnt = {};
-
-// Initializes the slideshow
-function initializeSlides(set) {
-  current_cnt[set] = 1;
+// Grab the data from server via JSON
+function getContentData(article_id, isHomePage) {
+  var xmlhttp = new XMLHttpRequest();
+  xmlhttp.onreadystatechange = function() {
+      if (this.readyState == 4 && this.status == 200 && this.responseText != "") {
+          var json_obj = JSON.parse(this.responseText);
+          if (isHomePage) {
+            populateHomeImages(json_obj);
+          } else {
+            createHero(json_obj);
+            displayMainContent(json_obj);
+          }
+      }
+      else {
+        //TODO: Display an error page
+        console.log(this.responseText);
+      }
+  };
+  xmlhttp.open("POST", "../page_content.php", true);
+  xmlhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+  xmlhttp.send("param=" + article_id);
 }
 
-// Display a given slide
-function showSlides(n, set, set_caption) {
-  var i;
-  var slides = document.getElementsByClassName(set);
-  var caption = document.getElementsByClassName(set_caption)[0];
-  var currentSlide;
+// Set a background image for a div
+function setBgImage(img_div_name, img_url, size, position) {
+  var img_div;
+  var full_url;
 
-  if (n > slides.length) {
-    current_cnt[set] = 1;
-  } 
-  
-  if (n < 1) {
-    current_cnt[set] = slides.length;
-  }
-  
-  for (i = 0; i < slides.length; i++) {
-      slides[i].style.display = "none"; 
-  }
-
-  n = current_cnt[set];
-  currentSlide = slides[n-1];
-  currentSlide.style.display = "block";
-  caption.innerHTML = currentSlide.getElementsByTagName("p")[0].innerHTML;
-  console.log(caption.innerHTML);
+  img_div = document.getElementsByClassName(img_div_name);
+  full_url = "url('" + img_url + "')";
+  img_div[0].style.backgroundImage = full_url;
+  img_div[0].style.backgroundSize = size;
+  img_div[0].style.backgroundPosition = position;
 }
 
-// Move to the previous or next slide
-function plusSlides(n, set, set_caption) {
-  current_cnt[set] += n;
-  showSlides(current_cnt[set], set, set_caption);
+function showNav() {
+  var nav_div = document.getElementsByClassName('navigation');
+  nav_div[0].innerHTML = "<img src=\"assets/hlt_logo.svg\"><ul class=\"top_nav\" id=\"responsive_nav\"><li class=\"title\"><a class=\"nav_link\" href=\"javascript:void(0);\" onclick=\"toggleNav()\">MENU</a></li><li class=\"home\"><a class=\"nav_link\" href=\"index.html\">HOME</a></li><li><a class=\"nav_link\" href=\"enroute.html?globetrotting\">GLOBETROTTING</a></li><li><a class=\"nav_link\" href=\"enroute.html?usa\">U.S.A</a></li><li><a class=\"nav_link\" href=\"enroute.html?doggie\">DOGGIE TRIPS</a></li></ul>";
+}
+
+function showFooter() {
+  var footer_div = document.getElementsByTagName('footer');
+  footer_div[0].innerHTML = "<p>Copyright 2017 Zheng (Hannah) Yang</p>";
 }
 
 // Mobile nav

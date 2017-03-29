@@ -2,17 +2,17 @@
  * Homepage-specific header treatment
  */
 
-.hero h1, h3 {
+.home h1, h3 {
 	color: #FFFFFF;
 }
 
-.hero h1 {
+.home h1 {
 	font-size: 400%;
 	letter-spacing: 1.33px;
 	line-height: 161.8%;
 }
 
-.hero {
+.home {
 	background: none;
 	padding: 0;
 	bottom: 80px;
@@ -22,7 +22,7 @@
 	width: 100%;
 	display: flex;
 	flex-wrap: wrap;
-	padding: 80px 50px 0 50px;
+	padding: 80px 50px 80px 50px;
 }
 
 /*
@@ -132,11 +132,11 @@ a.top {
  	 * Adjust the hero section of the homepage
  	 */
 
-	.hero h1 {
+	.home h1 {
 		font-size: 300%;
 	}
 
-	.hero {
+	.home {
 		margin-left: 50px;
 	}
 }
@@ -155,7 +155,7 @@ a.top {
 		height: 100%;
 	}
 
-	.hero {
+	.home {
 		margin: auto;
 		padding: 0 20px;
 		bottom: 40px;
@@ -214,13 +214,13 @@ a.top {
  	 * Adjust the hero text
  	 */
 
-	.hero h1 {
+	.home h1 {
 		font-size: 212.5%;
 		line-height: 120%;
 		padding-bottom: 10px;
 	}
 
-	.hero h3 {
+	.home h3 {
 		font-size: 100%;
 		font-family: 'Open San', sans-serif;
 		font-weight: 700;
