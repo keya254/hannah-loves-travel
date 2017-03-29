@@ -86,7 +86,6 @@ function displaySections(data_obj) {
 
 	// Intialize all the slideshows on the page
 	intializeSlideshows();
-	slideshow_id_list = [];
 }
 
 // Create a subsection in the page
@@ -98,8 +97,9 @@ function createSection(section_obj) {
 	return_string += "<h2 class=\"block-title\">" + section_title + "</h2>";
 
 	// Create the slideshow
-	var slideshow = "<div class=\"slideshow_container\">";
 	var slideshow_id = section_title;
+	// The slide_container is used to host all images in the slide and act as the "touch-activated" area for swipes
+	var slideshow = "<div class=\"slideshow_container\"><div class=\"slide_container\" id=\"" + slideshow_id + "\">";
 	var slide_list = section_obj.slideshow;
 	var slide;
 	var index;
@@ -108,6 +108,7 @@ function createSection(section_obj) {
 		slide = slide_list[index];
 		slideshow += createSlide(slide, slideshow_id);
 	}
+	slideshow += "</div>";
 	// Add the controls
 	var caption_id = slideshow_id + "_caption";
 	slideshow += "<p class=\"caption "+ caption_id + "\"></p><a class=\"prev\" onclick=\"plusSlides(-1, '" + slideshow_id + "', '" + caption_id + "')\">&#10094;</a><a class=\"next\" onclick=\"plusSlides(1, '" + slideshow_id + "', '" + caption_id + "')\">&#10095;</a>";
@@ -152,6 +153,8 @@ function intializeSlideshows() {
 		initializeSlides(slideshow_id);
 		showSlides(current_cnt[slideshow_id], slideshow_id, slideshow_id+'_caption');
 	}
+
+	addSwipeHandlers();
 }
 
 // Initializes the slideshow
@@ -189,4 +192,39 @@ function showSlides(n, set, set_caption) {
 function plusSlides(n, set, set_caption) {
   current_cnt[set] += n;
   showSlides(current_cnt[set], set, set_caption);
+}
+
+// Handle left and right swipes on the slideshows
+function addSwipeHandlers() {
+	var slideshow_container = document.getElementsByClassName('slide_container');
+	var startX; // Touch start x position
+	var distance;
+	var min_distance = 100; // Minimum distance of a swipe to be considered valid
+	var index;
+
+	for (index = 0; index < slideshow_container.length; index++) {
+		slideshow_container[index].addEventListener('touchstart', function(event) {
+		    var touch = event.changedTouches[0];
+		    distance = 0;
+		    startX = touch.pageX;
+		}, false);
+
+		slideshow_container[index].addEventListener('touchend', function(event) {
+		    var touch = event.changedTouches[0];
+		    distance = touch.pageX - startX;
+
+	        if (Math.abs(distance) >= min_distance) {
+	        	var slideshow_id = this.id; // Get the id for that slideshow
+				var caption_id = slideshow_id + '_caption';
+	        	if (distance > 0) {
+	        		// In this case, it's a swipe right, the equivalent of clicking on "prev"
+	        		plusSlides(-1, slideshow_id, caption_id);
+	        		
+	        	} else {
+	        		// In this case, it's a swipe left, the equivalent of clicking on "next"
+	        		plusSlides(1, slideshow_id, caption_id);
+	        	}
+	        }
+		}, false);
+	}
 }
