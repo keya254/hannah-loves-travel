@@ -30,7 +30,12 @@ showFooter();
 function createHero(data_obj){
 	// Hero image
 	var img_url = data_obj.hero_img + 'w' + (width + 200) + '-no';
-	setBgImage('header_img_container', img_url, "cover", "center");
+	var img_position = "center"; // Default position of background image
+
+	if (data_obj.img_position) {
+		img_position = data_obj.img_position;
+	}
+	setBgImage('header_img_container', img_url, "cover", img_position);
 
 	// Hero text
 	var hero = document.getElementsByClassName('hero');
