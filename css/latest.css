@@ -1,0 +1,258 @@
+* {
+	box-sizing: border-box;
+	margin: auto;
+	font-family: 'Alegreya Sans', sans-serif;
+	letter-spacing: 1px;
+	line-height: 161.8%;
+}
+
+html {
+	background-color: rgba(0,0,0,1);
+}
+
+body {
+	max-width: 1440px;
+}
+
+header {
+	position: fixed;
+	width: 100%;
+	top: 0;
+	background-color: rgba(0,0,0,0.4);
+}
+
+.header {
+	width: 100%;
+	height: 75px;
+	position: relative;
+}
+
+.header h3 {
+	color: #FFFFFF;
+	padding-top: 14px;
+	padding-left: 20px;
+}
+
+.mobile_title {
+	display: none;
+	width: 100%;
+	text-align: center;
+}
+
+.mobile_title h1 {
+	color: #FFFFFF;
+	padding-top: 180px;
+	padding-bottom: 120px;
+}
+
+footer {
+	background-color: #000000;
+	width: 100%;
+	padding-top: 10px;
+	padding-bottom: 10px;
+	text-align: center;
+	color: rgba(255,255,255,0.7);
+	font-size: 0.9rem;
+}
+
+a {
+	text-decoration: none;
+	color: #FFFFFF;
+	height: auto;
+	padding-top: 20px;
+	padding-bottom: 20px;
+	border: 2px solid #FFFFFF;
+	background-color: rgba(0,0,0,0.2);
+	display: inline-block;
+}
+
+a:hover {
+	background-color: rgba(0,0,0,0.5);
+	transform: scale(1.05);
+	transition: all 0.4s ease;
+	cursor: pointer;
+}
+
+/*
+ * Guide styles
+ */
+
+.content_container {
+	margin-top: 40px;
+	width: 100%;
+	height: 100vh;
+	max-height: 650px;
+	display: flex;
+	flex-direction: row;
+	flex-wrap: nowrap;
+}
+
+.text_panel {
+	width: 35%;
+	margin-bottom: 0;
+}
+
+.photo_panel {
+	width: 65%;
+	height: auto;
+	margin: 0;
+	align-self: flex-end;
+}
+
+img.photo {
+	width: 100%;
+	height: auto;
+}
+
+.description b,p {
+	color: #FFFFFF;
+	text-align: right;
+	display: block;
+	width: 100%;
+	opacity: 0.8;
+	max-width: 300px;
+}
+
+b {
+	font-size: 1.2rem;
+}
+
+.fadein {
+    opacity: 0;
+}
+
+/*
+ * Homepage styles
+ */
+
+.parallax {
+	margin: 0;
+	background-image: url("https://lh3.googleusercontent.com/bTM6EfL5x3DdFP9Fc6wXeBHOziW3qKHhudpiCpJ_WSyVamQqK_A2qYpfY1Uw5CmtrwtVHZ4XxDspIrW4cQcAK0RGPBLoWkV3GVy8wqSTkUMJREtyAyskpXBPLbFEwD2b1Ap2ODNqgzQavUYGIDqwUImjRlfKYrXcvumg09pdVvYcSlnHv9oMQlMb4XREd3qOjQBheAymihoCYQQf0NNFSrPdxy2J-defEHDro8Xdg2vFW6iEjmV1_uw9VOcpc0VcTAqMxSVPgbUavSNy2_DrEOgyqAeAbeVagyGTgeU7tdjSkCTKrSq2ifTZC_Hk4ILDH4geE6BL5q1i_BHBPLqRAp0FgpxQ6vLBHGtNBVd_VA1IpoIb9H3ajWZQK56hSe7KnzRQYcPGGbZv0OZeL4r30hwwpCUfL29gcod8mInU_V546dvloObgtHX04nFyTShNvaErKs3ZfwkMmpMUjdkCjkRRkiQjPZgwqtdXudiOtHCuggAb056HO6DdvLoycW2CeyItL83yZjio7jyaj16CU2F2paTqKYbuebbajwXw1yhJE3U6Kl-pc_4r3ujBM8bC17OVHJYRV7Npq0yCmFR7O5ystVebuQPr9DuWcHQqiU_4K6MrZiPSZD66_Qtb7zSq3Kf2A1gE2QqFJiUEUiYw6r5rk76qU2t4c_0WRiIZOzU=w1600-no");
+	height: 90vh;
+	max-height: 700px;
+	background-attachment: fixed;
+	background-size: cover;
+	background-position: center;
+	text-align: center;
+	text-align: center;
+}
+
+a.home_nav {
+	border: none;
+	color: #FFFFFF;
+	font-size: 1.1rem;
+	display: inline-block;
+	text-align: right; 
+	padding-top: 14px;
+	padding-right: 20px;
+	background: none;
+	position: absolute;
+	top: 0;
+	right: 0;
+	opacity: 0.8;
+	z-index: 1;
+}
+
+a.home_nav:hover {
+	transform: none;
+	cursor: pointer;
+}
+
+.home_nav img {
+	height: 16px;
+	width: auto;
+	text-align: right;
+}
+
+.home_nav p {
+	font-size: 0.9rem;
+}
+
+.feature a {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 180px;
+	padding: 40px 80px;
+}
+
+.collections {
+	width: 100%;
+	display: flex;
+	flex-wrap: wrap;
+}
+
+.destination {
+	width: 25%;
+	height: 250px;
+	background-position: center;
+	background-size: cover;
+	text-align: center;
+}
+
+.destination a {
+	font-size: 1.5rem;
+	text-align: center;
+	width: 200px;
+	margin-top: 80px;
+}
+
+@media all and (max-width: 1100px) {
+	.destination {
+		width: 33.3333%;
+	}
+
+	.content_container {
+		margin-top: 80px;
+		flex-direction: column;
+		flex-wrap: wrap;
+		height: auto;
+		max-height: none;
+	}
+
+	.photo_panel {
+		width: 100%;
+		order: 1;
+	}
+
+	.text_panel {
+		width: 100%;
+		order: 2;
+	}
+
+	.description b,p {
+		text-align: left;
+	}
+}
+
+@media all and (max-width: 780px) {
+	.destination {
+		width: 50%;
+	}
+}
+
+@media all and (max-width: 560px) {
+	.parallax {
+		display: none;
+	}
+
+	.collections {
+		margin-top: 76px;
+	}
+
+	.destination {
+		width: 100%;
+	}
+
+	.header h3 {
+		display: none;
+	}
+
+	.mobile_title {
+		display: block;
+	}
+
+	.content_container {
+		margin-top: 0;
+		margin-bottom: 60px;
+	}
+}
